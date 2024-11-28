@@ -1,5 +1,9 @@
 // Historical Bitcoin prices (sample data)
-export const historicalPrices = {
+export type HistoricalPrices = {
+  [key: string]: number;
+}
+
+export const historicalPrices: HistoricalPrices = {
   "2013-01-01": 13.30,
   "2015-01-01": 315.80,
   "2017-01-01": 997.69,
@@ -9,7 +13,13 @@ export const historicalPrices = {
   "today": -1 // Special value to indicate current price should be used
 };
 
-export const items = [
+export type Item = {
+  name: string;
+  price: number;
+  image: string;
+}
+
+export const items: Item[] = [
   {
     name: "Tesla Model S",
     price: 74990,

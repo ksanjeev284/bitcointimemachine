@@ -7,21 +7,23 @@ export const CurrentPrice: React.FC = () => {
   const { price, loading, error } = useBitcoinPrice();
 
   return (
-    <div className="w-full max-w-md p-6 bg-white rounded-xl shadow-lg mb-6">
+    <div className="w-full bg-white rounded-xl shadow-lg p-6">
       <div className="flex items-center gap-2 mb-4">
         <TrendingUp className="w-6 h-6 text-orange-500" />
         <h2 className="text-xl font-bold text-gray-800">Current Bitcoin Price</h2>
       </div>
 
-      <div className="text-center">
+      <div className="mt-4">
         {loading && (
-          <div className="text-gray-600">Loading current price...</div>
+          <div className="flex items-center justify-center py-4">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-orange-500"></div>
+          </div>
         )}
         {error && (
-          <div className="text-red-500">{error}</div>
+          <div className="text-red-500 text-center py-4">{error}</div>
         )}
         {price && (
-          <div className="text-3xl font-bold text-gray-900">
+          <div className="text-4xl font-bold text-gray-900 text-center py-4">
             {formatCurrency(price)}
           </div>
         )}

@@ -1,7 +1,9 @@
+import { HistoricalPrices } from '../data/bitcoinData';
+
 export const calculateCurrentValue = (
   initialInvestment: number,
   purchaseDate: string,
-  historicalPrices: Record<string, number>,
+  historicalPrices: HistoricalPrices,
   currentPrice: number
 ): number => {
   const purchasePrice = purchaseDate === 'today' ? currentPrice : historicalPrices[purchaseDate];
