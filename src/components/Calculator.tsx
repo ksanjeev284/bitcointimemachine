@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Bitcoin } from 'lucide-react';
 import { historicalPrices, HistoricalPrices } from '../data/bitcoinData';
 import { calculateCurrentValue, formatCurrency } from '../utils/calculations';
 
 interface CalculatorProps {
   currentPrice: number | null;
+  onValuesChange: (investment: number, currentValue: number) => void;
 }
 
-export const Calculator: React.FC<CalculatorProps> = ({ currentPrice }) => {
+export const Calculator: React.FC<CalculatorProps> = ({ currentPrice, onValuesChange }) => {
   const [investment, setInvestment] = useState<string>('1000');
   const [purchaseDate, setPurchaseDate] = useState<string>('2017-01-01');
 
@@ -17,6 +18,10 @@ export const Calculator: React.FC<CalculatorProps> = ({ currentPrice }) => {
     historicalPrices,
     currentPrice ?? historicalPrices['2024-01-01']
   );
+
+  useEffect(() => {
+    onValuesChange(Number(investment), currentValue);
+  }, [investment, currentValue, onValuesChange]);
 
   const profit = currentValue - Number(investment);
   const profitPercentage = ((profit / Number(investment)) * 100).toFixed(2);

@@ -1,18 +1,18 @@
+import { useState, useCallback } from 'react';
 import { Calculator } from './components/Calculator';
 import { ItemList } from './components/ItemList';
 import { CurrentPrice } from './components/CurrentPrice';
-import { calculateCurrentValue } from './utils/calculations';
-import { historicalPrices } from './data/bitcoinData';
 import { useBitcoinPrice } from './hooks/useBitcoinPrice';
 
 function App() {
   const { price: currentPrice } = useBitcoinPrice();
-  const currentValue = calculateCurrentValue(
-    1000, // Default investment
-    '2017-01-01', // Default purchase date
-    historicalPrices,
-    currentPrice ?? historicalPrices['2024-01-01']
-  );
+  const [investment, setInvestment] = useState(1000);
+  const [currentValue, setCurrentValue] = useState(1000);
+
+  const handleValuesChange = useCallback((newInvestment: number, newCurrentValue: number) => {
+    setInvestment(newInvestment);
+    setCurrentValue(newCurrentValue);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4">
@@ -26,12 +26,18 @@ function App() {
           {/* Left column - Calculations */}
           <div className="space-y-8">
             <CurrentPrice />
-            <Calculator currentPrice={currentPrice} />
+            <Calculator 
+              currentPrice={currentPrice} 
+              onValuesChange={handleValuesChange}
+            />
           </div>
           
           {/* Right column - Items */}
           <div className="lg:pl-8">
-            <ItemList currentValue={currentValue} initialInvestment={1000} />
+            <ItemList 
+              currentValue={currentValue} 
+              initialInvestment={investment}
+            />
           </div>
         </div>
       </div>
