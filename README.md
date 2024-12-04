@@ -78,5 +78,5 @@ bitcointimemachine/
 
 ## Contributing
 
-Feel free to submit issues and enhancement requests!
+Feel free to submit issues and enhancement requests with pull requests.!
 
