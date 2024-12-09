@@ -34,13 +34,13 @@ export const Calculator: React.FC<CalculatorProps> = ({ currentPrice, onValuesCh
   };
 
   return (
-    <div className="w-full bg-white rounded-xl shadow-lg p-6">
-      <div className="flex items-center gap-2 mb-8">
-        <Bitcoin className="w-8 h-8 text-orange-500" />
-        <h2 className="text-2xl font-bold text-gray-800">Investment Calculator</h2>
+    <div className="w-full bg-white rounded-xl shadow-lg p-4 sm:p-6">
+      <div className="flex items-center gap-2 mb-6 sm:mb-8">
+        <Bitcoin className="w-6 h-6 sm:w-8 sm:h-8 text-orange-500" />
+        <h2 className="text-xl sm:text-2xl font-bold text-gray-800">Investment Calculator</h2>
       </div>
 
-      <div className="space-y-6">
+      <div className="space-y-4 sm:space-y-6">
         <div>
           <label className="block text-sm font-medium text-gray-700 mb-2">
             Initial Investment (USD)
@@ -51,7 +51,7 @@ export const Calculator: React.FC<CalculatorProps> = ({ currentPrice, onValuesCh
               type="number"
               value={investment}
               onChange={(e) => setInvestment(e.target.value)}
-              className="w-full pl-8 pr-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+              className="w-full pl-8 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
               placeholder="Enter amount"
             />
           </div>
@@ -64,32 +64,27 @@ export const Calculator: React.FC<CalculatorProps> = ({ currentPrice, onValuesCh
           <select
             value={purchaseDate}
             onChange={(e) => setPurchaseDate(e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
           >
-            {(Object.keys(historicalPrices) as Array<keyof HistoricalPrices>).map((date) => (
+            {Object.keys(historicalPrices).map((date) => (
               <option key={date} value={date}>
-                {formatDate(date)}
+                {formatDate(date as keyof HistoricalPrices)}
               </option>
             ))}
           </select>
         </div>
 
-        <div className="mt-8 p-6 bg-gray-50 rounded-lg">
-          <h3 className="text-lg font-semibold text-gray-800 mb-4">Investment Summary</h3>
-          <div className="space-y-3">
-            <div className="flex justify-between">
-              <span className="text-gray-600">Initial Investment:</span>
-              <span className="font-medium">{formatCurrency(Number(investment))}</span>
+        <div className="mt-8 p-4 sm:p-6 bg-gray-50 rounded-lg">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div>
+              <p className="text-sm text-gray-600">Current Value</p>
+              <p className="text-xl sm:text-2xl font-bold text-gray-900">{formatCurrency(currentValue)}</p>
             </div>
-            <div className="flex justify-between">
-              <span className="text-gray-600">Current Value:</span>
-              <span className="font-medium">{formatCurrency(currentValue)}</span>
-            </div>
-            <div className="flex justify-between pt-3 border-t border-gray-200">
-              <span className="text-gray-600">Profit/Loss:</span>
-              <span className={`font-medium ${profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
-                {formatCurrency(profit)} ({profitPercentage}%)
-              </span>
+            <div>
+              <p className="text-sm text-gray-600">Profit/Loss</p>
+              <p className={`text-xl sm:text-2xl font-bold ${profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+                {profit >= 0 ? '+' : ''}{formatCurrency(profit)} ({profit >= 0 ? '+' : ''}{profitPercentage}%)
+              </p>
             </div>
           </div>
         </div>

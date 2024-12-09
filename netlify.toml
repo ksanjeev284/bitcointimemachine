@@ -1,0 +1,29 @@
+[build]
+  command = "npm run build"
+  functions = "netlify/functions"
+  publish = "dist"
+
+[[redirects]]
+  from = "/.netlify/functions/*"
+  to = "/.netlify/functions/:splat"
+  status = 200
+
+[[redirects]]
+  from = "/privacy"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/terms"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/contact"
+  to = "/index.html"
+  status = 200
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
