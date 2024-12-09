@@ -25,7 +25,7 @@ function App() {
         <nav className="bg-white shadow-md">
           <div className="container mx-auto px-4 py-4">
             <div className="flex justify-between items-center">
-              <Link to="/" className="text-2xl font-bold text-orange-500">
+              <Link to="/" className="text-2xl font-bold text-orange-700">
                 Bitcoin Time Machine
               </Link>
               <div className="space-x-4">
