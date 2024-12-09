@@ -4,7 +4,17 @@ import { useBitcoinPrice } from '../hooks/useBitcoinPrice';
 import { formatCurrency } from '../utils/calculations';
 
 export const CurrentPrice: React.FC = () => {
-  const { price, loading, error } = useBitcoinPrice();
+  const { price, loading, error, lastUpdated } = useBitcoinPrice();
+
+  const formatLastUpdated = (date: Date | null) => {
+    if (!date) return '';
+    const now = new Date();
+    const diff = Math.floor((now.getTime() - date.getTime()) / 1000); // difference in seconds
+
+    if (diff < 60) return 'Just now';
+    if (diff < 3600) return `${Math.floor(diff / 60)} minutes ago`;
+    return `${Math.floor(diff / 3600)} hours ago`;
+  };
 
   return (
     <div className="w-full bg-white rounded-xl shadow-lg p-6">
@@ -23,9 +33,16 @@ export const CurrentPrice: React.FC = () => {
           <div className="text-red-500 text-center py-4">{error}</div>
         )}
         {price && (
-          <div className="text-4xl font-bold text-gray-900 text-center py-4">
-            {formatCurrency(price)}
-          </div>
+          <>
+            <div className="text-4xl font-bold text-gray-900 text-center py-4">
+              {formatCurrency(price)}
+            </div>
+            {lastUpdated && (
+              <div className="text-sm text-gray-500 text-center">
+                Last updated: {formatLastUpdated(lastUpdated)}
+              </div>
+            )}
+          </>
         )}
       </div>
     </div>
