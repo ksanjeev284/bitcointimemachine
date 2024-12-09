@@ -22,7 +22,7 @@ export const ItemList: React.FC<ItemListProps> = ({ currentValue, initialInvestm
             <div
               key={item.name}
               className={`relative overflow-hidden rounded-xl border ${
-                canAfford ? 'border-green-200 bg-green-50' : 'border-gray-200 bg-gray-50'
+                canAfford ? 'border-green-300 bg-green-100' : 'border-gray-300 bg-gray-100'
               }`}
             >
               <div className="flex flex-col sm:flex-row">
@@ -37,11 +37,11 @@ export const ItemList: React.FC<ItemListProps> = ({ currentValue, initialInvestm
                   <h3 className="text-lg font-semibold text-gray-800 mb-2">{item.name}</h3>
                   <p className="text-gray-600 font-medium mb-2">{formatCurrency(item.price)}</p>
                   {canAfford ? (
-                    <p className="text-green-600 font-medium">
+                    <p className="text-green-800 font-medium">
                       You could buy {quantity} with your profits!
                     </p>
                   ) : (
-                    <p className="text-red-600 font-medium">
+                    <p className="text-red-800 font-medium">
                       You need {formatCurrency(item.price - profit)} more in profits
                     </p>
                   )}

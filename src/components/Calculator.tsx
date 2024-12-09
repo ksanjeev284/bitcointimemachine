@@ -58,13 +58,15 @@ export const Calculator: React.FC<CalculatorProps> = ({ currentPrice, onValuesCh
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="purchase-date" className="block text-sm font-medium text-gray-700 mb-2">
             Purchase Date
           </label>
           <select
+            id="purchase-date"
             value={purchaseDate}
             onChange={(e) => setPurchaseDate(e.target.value)}
             className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-orange-500"
+            aria-label="Select purchase date"
           >
             {Object.keys(historicalPrices).map((date) => (
               <option key={date} value={date}>
@@ -82,7 +84,7 @@ export const Calculator: React.FC<CalculatorProps> = ({ currentPrice, onValuesCh
             </div>
             <div>
               <p className="text-sm text-gray-600">Profit/Loss</p>
-              <p className={`text-xl sm:text-2xl font-bold ${profit >= 0 ? 'text-green-600' : 'text-red-600'}`}>
+              <p className={`text-xl sm:text-2xl font-bold ${profit >= 0 ? 'text-green-800' : 'text-red-800'}`}>
                 {profit >= 0 ? '+' : ''}{formatCurrency(profit)} ({profit >= 0 ? '+' : ''}{profitPercentage}%)
               </p>
             </div>
