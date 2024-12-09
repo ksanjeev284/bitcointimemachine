@@ -4,7 +4,7 @@
   publish = "dist"
 
 [[redirects]]
-  from = "/api/*"
+  from = "/.netlify/functions/*"
   to = "/.netlify/functions/:splat"
   status = 200
 
@@ -12,22 +12,18 @@
   from = "/privacy"
   to = "/index.html"
   status = 200
-  force = true
 
 [[redirects]]
   from = "/terms"
   to = "/index.html"
   status = 200
-  force = true
 
 [[redirects]]
   from = "/contact"
   to = "/index.html"
   status = 200
-  force = true
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
-  force = true
