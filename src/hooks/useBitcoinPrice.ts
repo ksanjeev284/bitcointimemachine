@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Use relative URL in production, fallback to localhost in development
 const API_URL = process.env.NODE_ENV === 'production'
-  ? '/.netlify/functions/bitcoin-price'
+  ? '/api/bitcoin-price'
   : 'http://localhost:8888/.netlify/functions/bitcoin-price';
 
 const POLLING_INTERVAL = 5 * 60 * 1000; // 5 minutes in milliseconds
